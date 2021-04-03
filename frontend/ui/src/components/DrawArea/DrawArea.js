@@ -3,9 +3,25 @@ import ReactDOM from "react-dom"
 import Sketch from 'react-p5';
 
 class DrawArea extends Component {
+  state = {
+    sketch: React.createRef(),
+    refresh:false,
+  }
+
+  componentDidMount(){
+
+  }
+
+  handleRefresh = (p5) => {
+    if(this.state.refresh){
+      p5.clear();
+      p5.background(250);
+      this.setState({refresh:false});
+    }
+  }
+
   setup = (p5, parentRef) => {
 		p5.createCanvas(500, 500).parent(parentRef);
-
 		p5.background(250);
 	};
 
@@ -21,7 +37,11 @@ class DrawArea extends Component {
 	};
   render(){
     return (
-      <Sketch setup={this.setup} draw={this.draw}  />
+      <div>
+      <button onClick={()=>{this.setState({refresh:true})}}>Refresh</button>
+      <button>Generate Image</button>
+      <Sketch ref={this.state.sketch} setup={this.setup} draw={this.draw} mousePressed={this.handleRefresh}  />
+      </div>
     );
   }
 }
