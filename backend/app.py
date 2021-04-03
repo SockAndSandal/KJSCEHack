@@ -9,7 +9,8 @@ from tensorflow import keras
 
 
 # load model
-model = keras.models.load_model('./model.h5')
+modelFileName = 'quickdraw_init_model.h5'
+model = keras.models.load_model('./models/{}'.format(modelFileName))
 
 # app
 app = Flask(__name__)
