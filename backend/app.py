@@ -23,6 +23,9 @@ def maskImage(base64_img):
     return decoded_image_data
 
 # routes
+@app.route('/', methods=['GET'])
+def base():
+    print('hello world')
 
 @app.route('/run', methods=['POST'])
 def predict():
