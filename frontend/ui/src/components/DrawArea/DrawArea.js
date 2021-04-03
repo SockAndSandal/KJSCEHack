@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import ReactDOM from "react-dom"
 import Sketch from 'react-p5';
+import "./DrawArea.css";
 
 class DrawArea extends Component {
   state = {
@@ -38,8 +39,8 @@ class DrawArea extends Component {
   render(){
     return (
       <div>
-      <button onClick={()=>{this.setState({refresh:true})}}>Refresh</button>
-      <button>Generate Image</button>
+      <button className="retro" onClick={()=>{this.setState({refresh:true})}}>🔄 Refresh</button>
+      <button className="retro">💡 Generate Image</button>
       <Sketch ref={this.state.sketch} setup={this.setup} draw={this.draw} mousePressed={this.handleRefresh}  />
       </div>
     );

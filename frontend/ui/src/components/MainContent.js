@@ -10,7 +10,7 @@ import DrawArea from './DrawArea/DrawArea'
 class MainContent extends Component{
 	render (){
 		return (
-			<Container class="main" style={{marginTop: "3%"}}>
+			<Container className="main" style={{marginTop: "3%"}}>
           <Row>
             <Col sm={6}>
               <h3>Canvas</h3>
