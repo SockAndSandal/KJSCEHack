@@ -19,7 +19,7 @@ class DrawArea extends Component {
       var img_b64 = this.state.sketch.current.sketch.canvas.toDataURL();
       console.log(JSON.stringify({imageBase64: img_b64}));
       this.setState({generating: true}, () => {
-        fetch("http://localhost:5000/", {
+        fetch("http://localhost:5000/run", {
         method: "POST",
         body: JSON.stringify({imageBase64: img_b64}),
         headers: {
