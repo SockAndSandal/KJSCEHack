@@ -7,10 +7,29 @@ class DrawArea extends Component {
   state = {
     sketch: React.createRef(),
     refresh:false,
+    generating: false,
   }
 
   componentDidMount(){
 
+  }
+  
+  handleGenerate = (p5) => {
+    if(this.state.generating){
+      var img_b64 = this.state.sketch.current.sketch.canvas.toDataURL();
+      console.log(JSON.stringify({imageBase64: img_b64}));
+      this.setState({generating: true}, () => {
+        fetch("http://localhost:5000/", {
+        method: "POST",
+        body: JSON.stringify({imageBase64: img_b64}),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+        .then((rep) => rep.json())
+        .then((rep) => {console.log(rep); this.props.setImg(rep); this.setState({generating: false})});
+      })
+    }
   }
 
   handleRefresh = (p5) => {
@@ -18,6 +37,14 @@ class DrawArea extends Component {
       p5.clear();
       p5.background(250);
       this.setState({refresh:false});
+    }
+  }
+
+  handleClick = (p5) => {
+    if(this.state.refresh){
+      this.handleRefresh(p5);
+    } else if(this.state.generating){
+      this.handleGenerate(p5);
     }
   }
 
@@ -40,8 +67,10 @@ class DrawArea extends Component {
     return (
       <div>
       <button className="retro" onClick={()=>{this.setState({refresh:true})}}>🔄 Refresh</button>
-      <button className="retro">💡 Generate Image</button>
-      <Sketch ref={this.state.sketch} setup={this.setup} draw={this.draw} mousePressed={this.handleRefresh}  />
+      <button className="retro" onClick={()=>{this.setState({generating:true})}}>
+        {this.state.generating ? 'Generating...' : '💡 Generate Image'}
+      </button>
+      <Sketch ref={this.state.sketch} setup={this.setup} draw={this.draw} mousePressed={this.handleClick}  />
       </div>
     );
   }

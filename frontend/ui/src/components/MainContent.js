@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from "react-bootstrap/Container";
@@ -7,8 +7,8 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import DrawArea from './DrawArea/DrawArea'
 
-class MainContent extends Component{
-	render (){
+function MainContent(){
+    const [generatedImg, setImg] = useState("");
 		return (
 			<Container className="main" style={{marginTop: "3%"}}>
           <Row>
@@ -22,21 +22,19 @@ class MainContent extends Component{
           <Row>
             <Col sm={6}>
               <Card style={{minHeight: "80vh"}}>
-                <DrawArea />
+                <DrawArea generateImg={setImg}/>
               </Card>
             </Col>
             <Col sm={6}>
               <Card style={{minHeight: "80vh"}}>
                 <Card.Body>
-                  Content
+                  {generatedImg === "" ? "Content" : generatedImg}
                 </Card.Body>
               </Card>
             </Col>
           </Row>
       </Container>
-			
 		);
-	}
 }
 
 export default MainContent;
