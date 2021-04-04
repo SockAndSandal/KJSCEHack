@@ -27,7 +27,7 @@ class DrawArea extends Component {
         },
       })
         .then((rep) => rep.json())
-        .then((rep) => {console.log(rep); this.props.setImg(rep); this.setState({generating: false})});
+        .then((rep) => {console.log(rep); this.props.generateImg(rep['output']); this.setState({generating: false})});
       })
     }
   }
