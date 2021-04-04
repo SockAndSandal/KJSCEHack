@@ -16,6 +16,7 @@ class DrawArea extends Component {
   
   handleGenerate = (p5) => {
     if(this.state.generating){
+      this.props.generateImg("Guessing...");
       var img_b64 = this.state.sketch.current.sketch.canvas.toDataURL();
       console.log(JSON.stringify({imageBase64: img_b64}));
       this.setState({generating: true}, () => {
