@@ -19,7 +19,7 @@ class DrawArea extends Component {
       var img_b64 = this.state.sketch.current.sketch.canvas.toDataURL();
       console.log(JSON.stringify({imageBase64: img_b64}));
       this.setState({generating: true}, () => {
-        fetch("http://localhost:5000/run", {
+        fetch("http://team73kjscehack.herokuapp.com/run", {
         method: "POST",
         body: JSON.stringify({imageBase64: img_b64}),
         headers: {
@@ -37,6 +37,7 @@ class DrawArea extends Component {
       p5.clear();
       p5.background(250);
       this.setState({refresh:false});
+      this.props.generateImg("");
     }
   }
 
@@ -68,7 +69,7 @@ class DrawArea extends Component {
       <div>
       <button className="retro" onClick={()=>{this.setState({refresh:true})}}>🔄 Refresh</button>
       <button className="retro" onClick={()=>{this.setState({generating:true})}}>
-        {this.state.generating ? 'Generating...' : '💡 Generate Image'}
+        {this.state.generating ? 'Guessing...' : '💡 Guess'}
       </button>
       <Sketch ref={this.state.sketch} setup={this.setup} draw={this.draw} mousePressed={this.handleClick}  />
       </div>
