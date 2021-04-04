@@ -7,7 +7,7 @@ class Navigation extends Component{
 	render (){
 		return (
 			<Navbar bg="dark" variant="dark" expand="lg" sticky="top">
-          		<Navbar.Brand href="#">ImageApp</Navbar.Brand>
+          		<Navbar.Brand href="#">Pictionary.ai</Navbar.Brand>
         	</Navbar>
 			
 		);
